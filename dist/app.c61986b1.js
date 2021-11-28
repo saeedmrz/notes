@@ -7353,6 +7353,7 @@ var button = document.querySelector("#addNote");
 var noteSelects = document.querySelectorAll(".selector");
 var notesBlock = document.querySelector(".notes");
 var notes = document.querySelectorAll(".note");
+var singleNote = document.querySelector(".note");
 var toggleService = xstate_1.interpret(state_1.toggleMachine);
 
 var toggle = function toggle() {
@@ -7433,32 +7434,75 @@ var init = function init() {
 };
 
 init();
-var cardInner = "\n\n            <textarea\n              type=\"text\"\n              placeholder=\"The beginning of screenless design: UI jobs to be take over by Solution Architect\"\n            ></textarea>\n            <div class=\"footer\">\n              <div class=\"date\">\n                <span>May 21, 2020</span>\n              </div>\n              <div class=\"edit\">\n                <button>\n                  <img src=\"./assets/icons/edit.svg\" alt=\"Edit Icon\" />\n                </button>\n              </div>\n            </div>   \n          \n";
+var cardInner = "\n\n            <textarea\n              type=\"text\"\n              placeholder=\"The beginning of screenless design: UI jobs to be take over by Solution Architect\"\n            ></textarea>\n            <div class=\"footer\">\n              <div class=\"date\">\n                <span>May 21, 2020</span>\n              </div>\n              <div class=\"edit\">\n                <button>\n                  <img src=\"./assets/icons/edit.svg\" alt=\"Edit Icon\" />\n                </button>\n              </div>\n            </div>   \n          \n"; // const animateNote = (card) => {
+//   const cardRect = card.getBoundingClientRect();
+//   const notesRect = notesBlock.getBoundingClientRect();
+//   const note =  document.querySelector('.note');
+//   const noteRect = document.querySelector('.note').getBoundingClientRect();
+//   const tl = anime.timeline();
+//   tl.add({
+//     targets: card,
+//     duration: 1000,
+//     easing: "easeInOutSine",
+//     translateX: 155,
+//     translateY: (cardRect.top - noteRect.top) * -1,
+//   }).add({
+//     targets: '.note',
+//     translateX: [0,noteRect.width+50],
+//     duration: 2000,
+//   }, "-=1000")
+//   .add({
+//     targets: card,
+//     borderRadius: 24,
+//     duration: 1000,
+//     width: 300,
+//     height: 310,
+//     complete: function () {
+//       card.className = "note";
+//       notesBlock.prepend(card);
+//       card.insertAdjacentHTML("afterbegin", cardInner);
+//     },
+//   }).add({
+//     targets: '.note',
+//     translateX:0
+//   }).add({
+//     targets: card,
+//     translateX: 0,
+//     translateY:0,
+//   })
+// };
 
 var animateNote = function animateNote(card) {
   var cardRect = card.getBoundingClientRect();
   var notesRect = notesBlock.getBoundingClientRect();
+  var noteRect = document.querySelector('.note').getBoundingClientRect();
   var tl = anime_es_js_1.default.timeline();
   tl.add({
     targets: card,
     duration: 1000,
     easing: "easeInOutSine",
-    translateX: 100,
-    translateY: function translateY(el) {
-      return [0, -100, 0];
-    }
+    translateX: 155,
+    translateY: (cardRect.top - noteRect.top) * -1
   }).add({
+    targets: '.note',
+    translateX: [0, noteRect.width + 50],
+    duration: 2000,
+    delay: 600
+  }, "-=1000").add({
     targets: card,
     borderRadius: 24,
+    duration: 1000,
     width: 300,
     height: 310,
-    translateX: 0,
-    translateY: 0,
     complete: function complete() {
       card.className = "note";
+      card.innerHTML = cardInner;
       notesBlock.prepend(card);
-      card.insertAdjacentHTML("afterbegin", cardInner);
+      card.style.transform = "translate(0,0)"; //  singleNote.style.transform = "translateX(0)";
     }
+  }, "-=1500").add({
+    targets: '.note',
+    translateX: 0
   });
 };
 
@@ -7471,8 +7515,6 @@ noteSelects.forEach(function (el) {
     var newCard = document.createElement("div");
     newCard.className = "note";
     var newDot = document.createElement("div");
-    newDot.style.top = "" + dotRect.top;
-    newDot.style.left = "" + dotRect.left;
     newDot.style.width = dotRect.width + "px";
     newDot.style.height = dotRect.height + "px";
     newDot.style.background = elStyle.background;
@@ -7508,7 +7550,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "12194" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3249" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

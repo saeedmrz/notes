@@ -122,7 +122,8 @@ main .notes {
   display: flex;
   flex-wrap: wrap;
 }
-main .notes .note {
+
+.note {
   margin: 24px;
   height: 310px;
   width: 300px;
@@ -131,7 +132,7 @@ main .notes .note {
   background: #ffcf7d;
   position: relative;
 }
-main .notes .note textarea {
+.note textarea {
   background: none;
   border: none;
   font-size: 21px;
@@ -142,10 +143,10 @@ main .notes .note textarea {
   resize: none;
   height: 100%;
 }
-main .notes .note textarea::placeholder {
+.note textarea::placeholder {
   color: #000;
 }
-main .notes .note .footer {
+.note .footer {
   padding: 28px;
   width: 100%;
   position: absolute;
@@ -155,11 +156,11 @@ main .notes .note .footer {
   align-items: center;
   justify-content: space-between;
 }
-main .notes .note .footer .date span {
+.note .footer .date span {
   font-size: 16px;
   font-weight: 500;
 }
-main .notes .note .footer .edit button {
+.note .footer .edit button {
   border-radius: 100%;
   background: #000;
   border: none;
@@ -171,7 +172,7 @@ main .notes .note .footer .edit button {
   outline: none;
   cursor: pointer;
 }
-main .notes .note .footer .edit button img {
+.note .footer .edit button img {
   height: 18px;
 }
 
