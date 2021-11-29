@@ -123,6 +123,15 @@ main .notes {
   flex-wrap: wrap;
 }
 
+.fa-edit {
+  color: white;
+  font-size: 16px;
+}
+
+.note-transform {
+  transform: translateX(0) !important;
+}
+
 .note {
   margin: 24px;
   height: 310px;

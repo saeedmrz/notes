@@ -6,11 +6,8 @@ import anime from "animejs/lib/anime.es.js";
 
 // Variables
 const button: HTMLElement = document.querySelector("#addNote");
-const noteSelects: NodeListOf<HTMLElement> =
-  document.querySelectorAll(".selector");
+const noteSelects: NodeListOf<HTMLElement> = document.querySelectorAll(".selector");
 const notesBlock: HTMLElement = document.querySelector(".notes");
-const notes: NodeListOf<HTMLElement> = document.querySelectorAll(".note");
-const singleNote :HTMLElement = document.querySelector(".note");
 
 
 const toggleService = interpret(toggleMachine);
@@ -107,7 +104,6 @@ const init = () => {
 init();
 
 const cardInner = `
-
             <textarea
               type="text"
               placeholder="The beginning of screenless design: UI jobs to be take over by Solution Architect"
@@ -118,7 +114,7 @@ const cardInner = `
               </div>
               <div class="edit">
                 <button>
-                  <img src="./assets/icons/edit.svg" alt="Edit Icon" />
+                <i class="fas fa-edit"></i>
                 </button>
               </div>
             </div>   
@@ -126,50 +122,13 @@ const cardInner = `
 `;
 
 
-// const animateNote = (card) => {
-//   const cardRect = card.getBoundingClientRect();
-//   const notesRect = notesBlock.getBoundingClientRect();
-//   const note =  document.querySelector('.note');
-//   const noteRect = document.querySelector('.note').getBoundingClientRect();
-//   const tl = anime.timeline();
-//   tl.add({
-//     targets: card,
-//     duration: 1000,
-//     easing: "easeInOutSine",
-//     translateX: 155,
-//     translateY: (cardRect.top - noteRect.top) * -1,
-//   }).add({
-//     targets: '.note',
-//     translateX: [0,noteRect.width+50],
-//     duration: 2000,
-//   }, "-=1000")
-//   .add({
-//     targets: card,
-//     borderRadius: 24,
-//     duration: 1000,
-//     width: 300,
-//     height: 310,
-//     complete: function () {
-//       card.className = "note";
-//       notesBlock.prepend(card);
-//       card.insertAdjacentHTML("afterbegin", cardInner);
-//     },
-//   }).add({
-//     targets: '.note',
-//     translateX:0
-//   }).add({
-//     targets: card,
-//     translateX: 0,
-//     translateY:0,
-    
-//   })
-// };
 
 const animateNote = (card) => {
   const cardRect = card.getBoundingClientRect();
-  const notesRect = notesBlock.getBoundingClientRect();
+  const notes: NodeListOf<HTMLElement> = document.querySelectorAll(".note");
   const noteRect = document.querySelector('.note').getBoundingClientRect();
   const tl = anime.timeline();
+
   tl.add({
     targets: card,
     duration: 1000,
@@ -188,24 +147,28 @@ const animateNote = (card) => {
     duration: 1000,
     width:  300,
     height: 310,
+    scaleY: {
+      value: [0,1],
+      duration: 2000,
+    },
     complete: function () {
       card.className = "note";
       card.innerHTML = cardInner;
+      notes.forEach(nt=> {
+      nt.classList.add('note-transform');
+    })
      notesBlock.prepend(card);
      card.style.transform = "translate(0,0)";
-    //  singleNote.style.transform = "translateX(0)";
+     
     },
-  },"-=1500").add({
-    targets:'.note',
-    translateX: 0,
-  })
+  },"-=1500")
 };
 
-const notesRect = notesBlock.getBoundingClientRect();
 
 noteSelects.forEach((el: HTMLElement) => {
   el.addEventListener("click", () => {
     // notesBlock.insertAdjacentHTML("afterbegin", cardInner);
+    const notes: NodeListOf<HTMLElement> = document.querySelectorAll(".note");
     const dotRect = el.getBoundingClientRect();
     const elStyle = getComputedStyle(el);
     const newCard = document.createElement("div");
@@ -217,6 +180,11 @@ noteSelects.forEach((el: HTMLElement) => {
     newDot.style.background = elStyle.background;
 
     el.prepend(newDot);
+
+    notes
+    .forEach(nt=> {
+      nt.classList.remove('note-transform');
+    })
     
     animateNote(newDot);
    

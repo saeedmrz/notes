@@ -7352,8 +7352,6 @@ var anime_es_js_1 = __importDefault(require("animejs/lib/anime.es.js")); // Vari
 var button = document.querySelector("#addNote");
 var noteSelects = document.querySelectorAll(".selector");
 var notesBlock = document.querySelector(".notes");
-var notes = document.querySelectorAll(".note");
-var singleNote = document.querySelector(".note");
 var toggleService = xstate_1.interpret(state_1.toggleMachine);
 
 var toggle = function toggle() {
@@ -7434,47 +7432,11 @@ var init = function init() {
 };
 
 init();
-var cardInner = "\n\n            <textarea\n              type=\"text\"\n              placeholder=\"The beginning of screenless design: UI jobs to be take over by Solution Architect\"\n            ></textarea>\n            <div class=\"footer\">\n              <div class=\"date\">\n                <span>May 21, 2020</span>\n              </div>\n              <div class=\"edit\">\n                <button>\n                  <img src=\"./assets/icons/edit.svg\" alt=\"Edit Icon\" />\n                </button>\n              </div>\n            </div>   \n          \n"; // const animateNote = (card) => {
-//   const cardRect = card.getBoundingClientRect();
-//   const notesRect = notesBlock.getBoundingClientRect();
-//   const note =  document.querySelector('.note');
-//   const noteRect = document.querySelector('.note').getBoundingClientRect();
-//   const tl = anime.timeline();
-//   tl.add({
-//     targets: card,
-//     duration: 1000,
-//     easing: "easeInOutSine",
-//     translateX: 155,
-//     translateY: (cardRect.top - noteRect.top) * -1,
-//   }).add({
-//     targets: '.note',
-//     translateX: [0,noteRect.width+50],
-//     duration: 2000,
-//   }, "-=1000")
-//   .add({
-//     targets: card,
-//     borderRadius: 24,
-//     duration: 1000,
-//     width: 300,
-//     height: 310,
-//     complete: function () {
-//       card.className = "note";
-//       notesBlock.prepend(card);
-//       card.insertAdjacentHTML("afterbegin", cardInner);
-//     },
-//   }).add({
-//     targets: '.note',
-//     translateX:0
-//   }).add({
-//     targets: card,
-//     translateX: 0,
-//     translateY:0,
-//   })
-// };
+var cardInner = "\n            <textarea\n              type=\"text\"\n              placeholder=\"The beginning of screenless design: UI jobs to be take over by Solution Architect\"\n            ></textarea>\n            <div class=\"footer\">\n              <div class=\"date\">\n                <span>May 21, 2020</span>\n              </div>\n              <div class=\"edit\">\n                <button>\n                <i class=\"fas fa-edit\"></i>\n                </button>\n              </div>\n            </div>   \n          \n";
 
 var animateNote = function animateNote(card) {
   var cardRect = card.getBoundingClientRect();
-  var notesRect = notesBlock.getBoundingClientRect();
+  var notes = document.querySelectorAll(".note");
   var noteRect = document.querySelector('.note').getBoundingClientRect();
   var tl = anime_es_js_1.default.timeline();
   tl.add({
@@ -7494,22 +7456,26 @@ var animateNote = function animateNote(card) {
     duration: 1000,
     width: 300,
     height: 310,
+    scaleY: {
+      value: [0, 1],
+      duration: 2000
+    },
     complete: function complete() {
       card.className = "note";
       card.innerHTML = cardInner;
+      notes.forEach(function (nt) {
+        nt.classList.add('note-transform');
+      });
       notesBlock.prepend(card);
-      card.style.transform = "translate(0,0)"; //  singleNote.style.transform = "translateX(0)";
+      card.style.transform = "translate(0,0)";
     }
-  }, "-=1500").add({
-    targets: '.note',
-    translateX: 0
-  });
+  }, "-=1500");
 };
 
-var notesRect = notesBlock.getBoundingClientRect();
 noteSelects.forEach(function (el) {
   el.addEventListener("click", function () {
     // notesBlock.insertAdjacentHTML("afterbegin", cardInner);
+    var notes = document.querySelectorAll(".note");
     var dotRect = el.getBoundingClientRect();
     var elStyle = getComputedStyle(el);
     var newCard = document.createElement("div");
@@ -7519,6 +7485,9 @@ noteSelects.forEach(function (el) {
     newDot.style.height = dotRect.height + "px";
     newDot.style.background = elStyle.background;
     el.prepend(newDot);
+    notes.forEach(function (nt) {
+      nt.classList.remove('note-transform');
+    });
     animateNote(newDot);
   });
 });
@@ -7550,7 +7519,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3249" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4288" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
