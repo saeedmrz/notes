@@ -7,13 +7,13 @@
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html"
   },
-  "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "sass": "^1.32.2",
-    "typescript": "^4.1.3"
-  },
   "dependencies": {
     "animejs": "^3.2.1",
-    "xstate": "^4.15.4"
+    "xstate": "^4.33.6"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.55.0",
+    "typescript": "^4.8.4"
   }
 }
