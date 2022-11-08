@@ -50,16 +50,14 @@ const animateNote = (card) => {
     );
 };
 
-export const animateCard = () => {
+// Add new card using dots
+export const animateDot = () => {
   noteSelects.forEach((el: HTMLElement) => {
     el.addEventListener("click", () => {
       noteSelects.forEach((el) => (el.style.pointerEvents = "none"));
-      // notesBlock.insertAdjacentHTML("afterbegin", cardInner);
       const notes: NodeListOf<HTMLElement> = document.querySelectorAll(".note");
       const dotRect = el.getBoundingClientRect();
       const elStyle = getComputedStyle(el);
-      //   const newCard = document.createElement("div");
-      //   newCard.className = "note";
 
       const newDot = document.createElement("div");
       newDot.style.width = `${dotRect.width}px`;

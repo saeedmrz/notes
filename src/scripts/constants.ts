@@ -8,7 +8,7 @@ export const notesBlock: HTMLElement = document.querySelector(
 export const cardInner = `
             <textarea
               type="text"
-              placeholder="The beginning of screenless design: UI jobs to be take over by Solution Architect"
+              placeholder="Computers themselves, and software yet to be developed, will revolutionize the way we learn."
             ></textarea>
             <div class="footer">
               <div class="date">

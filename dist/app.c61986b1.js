@@ -6934,7 +6934,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.button = exports.cardInner = exports.notesBlock = exports.noteSelects = void 0;
 exports.noteSelects = document.querySelectorAll(".selector");
 exports.notesBlock = document.querySelector(".notes");
-exports.cardInner = "\n            <textarea\n              type=\"text\"\n              placeholder=\"The beginning of screenless design: UI jobs to be take over by Solution Architect\"\n            ></textarea>\n            <div class=\"footer\">\n              <div class=\"date\">\n                <span>May 21, 2020</span>\n              </div>\n              <div class=\"edit\">\n                <button>\n                <i class=\"fas fa-edit\"></i>\n                </button>\n              </div>\n            </div>   \n          \n";
+exports.cardInner = "\n            <textarea\n              type=\"text\"\n              placeholder=\"Computers themselves, and software yet to be developed, will revolutionize the way we learn.\"\n            ></textarea>\n            <div class=\"footer\">\n              <div class=\"date\">\n                <span>May 21, 2020</span>\n              </div>\n              <div class=\"edit\">\n                <button>\n                <i class=\"fas fa-edit\"></i>\n                </button>\n              </div>\n            </div>   \n          \n";
 exports.button = document.querySelector("#addNote");
 },{}],"scripts/menu.ts":[function(require,module,exports) {
 "use strict";
@@ -6952,6 +6952,7 @@ var anime_es_js_1 = __importDefault(require("animejs/lib/anime.es.js"));
 var xstate_1 = require("xstate");
 var state_1 = require("./state");
 var constants_1 = require("./constants");
+// Using state machines to handle dots state
 var toggleService = (0, xstate_1.interpret)(state_1.toggleMachine);
 var toggle = function toggle() {
   constants_1.button.addEventListener("click", function () {
@@ -6965,6 +6966,7 @@ var buttonDisabled = function buttonDisabled(btnStatus) {
     constants_1.button.removeAttribute("disabled");
   }
 };
+// Menu animation
 var animate = function animate(status) {
   var tl = anime_es_js_1.default.timeline();
   if (status === "active") {
@@ -7036,7 +7038,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.animateCard = void 0;
+exports.animateDot = void 0;
 var anime_es_js_1 = __importDefault(require("animejs/lib/anime.es.js"));
 var constants_1 = require("./constants");
 var animateNote = function animateNote(card) {
@@ -7080,18 +7082,16 @@ var animateNote = function animateNote(card) {
     }
   }, "-=1500");
 };
-var animateCard = function animateCard() {
+// Add new card using dots
+var animateDot = function animateDot() {
   constants_1.noteSelects.forEach(function (el) {
     el.addEventListener("click", function () {
       constants_1.noteSelects.forEach(function (el) {
         return el.style.pointerEvents = "none";
       });
-      // notesBlock.insertAdjacentHTML("afterbegin", cardInner);
       var notes = document.querySelectorAll(".note");
       var dotRect = el.getBoundingClientRect();
       var elStyle = getComputedStyle(el);
-      //   const newCard = document.createElement("div");
-      //   newCard.className = "note";
       var newDot = document.createElement("div");
       newDot.style.width = "".concat(dotRect.width, "px");
       newDot.style.height = "".concat(dotRect.height, "px");
@@ -7105,7 +7105,7 @@ var animateCard = function animateCard() {
     });
   });
 };
-exports.animateCard = animateCard;
+exports.animateDot = animateDot;
 },{"animejs/lib/anime.es.js":"../node_modules/animejs/lib/anime.es.js","./constants":"scripts/constants.ts"}],"app.ts":[function(require,module,exports) {
 "use strict";
 
@@ -7115,7 +7115,7 @@ Object.defineProperty(exports, "__esModule", {
 var menu_1 = require("./scripts/menu");
 var card_1 = require("./scripts/card");
 (0, menu_1.init)();
-(0, card_1.animateCard)();
+(0, card_1.animateDot)();
 },{"./scripts/menu":"scripts/menu.ts","./scripts/card":"scripts/card.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -7141,7 +7141,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "7537" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "11724" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

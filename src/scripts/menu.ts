@@ -3,6 +3,7 @@ import { interpret } from "xstate";
 import { toggleMachine } from "./state";
 import { button } from "./constants";
 
+// Using state machines to handle dots state
 const toggleService = interpret(toggleMachine);
 
 const toggle = () => {
@@ -19,6 +20,7 @@ const buttonDisabled = (btnStatus: boolean) => {
   }
 };
 
+// Menu animation
 const animate = (status: any) => {
   const tl = anime.timeline();
   if (status === "active") {
